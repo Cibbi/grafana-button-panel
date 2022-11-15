@@ -33,7 +33,7 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
                     },
                   ],
                   from: from,
-                  to: to
+                  to: to,
                 },
               });
               const events = await SystemJS.load('app/core/app_events');
