@@ -16,6 +16,7 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
           variant={b.variant}
           onClick={async () => {
             const { range } = options;
+            console.log(options);
             const from = range!.from.valueOf();
             const to = range!.to.valueOf();
             const payload = JSON.parse(replaceVariables(b.query || '{}'));
