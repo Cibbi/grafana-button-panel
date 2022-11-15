@@ -6,7 +6,10 @@ import { ButtonOptions, Options } from 'types';
 
 interface Props extends PanelProps<Options> {}
 
-export const ButtonPanel: React.FC<Props> = ({  options,  timeRange,  replaceVariables }) => {
+export const ButtonPanel: React.FC<Props> = ({
+  options,
+  timeRange,
+  replaceVariables, }) => {
   const renderButtons = (buttons: ButtonOptions[]) => {
     return buttons.map((b: ButtonOptions, index: number) => {
       const text = b.text || 'Button';
