@@ -15,6 +15,9 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
           key={index}
           variant={b.variant}
           onClick={async () => {
+            const { range } = options;
+            const from = range!.from.valueOf();
+            const to = range!.to.valueOf();
             const payload = JSON.parse(replaceVariables(b.query || '{}'));
             const ds = await getDataSourceSrv().get(b.datasource);
             try {
@@ -29,6 +32,8 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
                       ...payload,
                     },
                   ],
+                  from: from,
+                  to: to
                 },
               });
               const events = await SystemJS.load('app/core/app_events');
