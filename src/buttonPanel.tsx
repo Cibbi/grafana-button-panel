@@ -20,7 +20,7 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
             try {
               const resp = await getBackendSrv().datasourceRequest({
                 method: 'POST',
-                url: 'api/tsdb/query',
+                url: 'api/ds/query',
                 data: {
                   queries: [
                     {
