@@ -1,4 +1,4 @@
-import { AppEvents, PanelProps } from '@grafana/data';
+import { AppEvents, getTimeField, PanelProps } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv, SystemJS } from '@grafana/runtime';
 import { Button, HorizontalGroup, VerticalGroup } from '@grafana/ui';
 import React from 'react';
@@ -6,7 +6,7 @@ import { ButtonOptions, Options } from 'types';
 
 interface Props extends PanelProps<Options> {}
 
-export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
+export const ButtonPanel: React.FC<Props> = ({ options, timeRange, replaceVariables }) => {
   const renderButtons = (buttons: ButtonOptions[]) => {
     return buttons.map((b: ButtonOptions, index: number) => {
       const text = b.text || 'Button';
@@ -15,10 +15,6 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
           key={index}
           variant={b.variant}
           onClick={async () => {
-            const { range } = options;
-            console.log(options);
-            const from = range!.from.valueOf();
-            const to = range!.to.valueOf();
             const payload = JSON.parse(replaceVariables(b.query || '{}'));
             const ds = await getDataSourceSrv().get(b.datasource);
             try {
@@ -33,8 +29,9 @@ export const ButtonPanel: React.FC<Props> = ({ options, replaceVariables }) => {
                       ...payload,
                     },
                   ],
-                  from: from,
-                  to: to,
+                  from: timeRange.from,
+                  to: timeRange.to,
+                  raw: timeRange.raw,
                 },
               });
               const events = await SystemJS.load('app/core/app_events');
