@@ -1,4 +1,4 @@
-import { AppEvents, getTimeField, PanelProps } from '@grafana/data';
+import { AppEvents, PanelProps } from '@grafana/data';
 import { getBackendSrv, getDataSourceSrv, SystemJS } from '@grafana/runtime';
 import { Button, HorizontalGroup, VerticalGroup } from '@grafana/ui';
 import React from 'react';
